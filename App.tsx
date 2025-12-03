@@ -6,7 +6,6 @@ LogBox.ignoreAllLogs(true);
 export default function App() {
   return (
     <SafeAreaProvider>
-      
       <AppNavigator />
     </SafeAreaProvider>
   );
