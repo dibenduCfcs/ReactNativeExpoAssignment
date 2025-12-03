@@ -8,7 +8,7 @@ const Stack = createNativeStackNavigator();
 export default function AppNavigator() {
   return (
     <NavigationContainer>
-      <Stack.Navigator>
+      <Stack.Navigator screenOptions={{statusBarStyle:'dark',statusBarAnimation:'none',}}>
         <Stack.Screen
           name="WebViewPage"
           component={WebViewScreen}

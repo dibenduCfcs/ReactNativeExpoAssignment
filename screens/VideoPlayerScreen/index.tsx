@@ -1,8 +1,8 @@
-import useTriggerNotifications from "@/hooks/use-send-Notification";
-import * as Notifications from "expo-notifications";
-import { useVideoPlayer, VideoView } from "expo-video";
-import { useEffect } from "react";
-import { Dimensions, StyleSheet, View } from "react-native";
+import useTriggerNotifications from '@/hooks/use-send-Notification';
+import {useVideoPlayer, VideoView} from 'expo-video';
+import {useEffect, useRef} from 'react';
+import {View} from 'react-native';
+import styles from './styles';
 
 /**
  * HLS (.m3u8) video stream URL used as the source for the VideoPlayerScreen.
@@ -10,25 +10,30 @@ import { Dimensions, StyleSheet, View } from "react-native";
  * @constant
  * @type {string}
  */
-const videoSource = "https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8";
+const videoSource = 'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8';
 
 export default function VideoPlayerScreen() {
-  const sendNotification = useTriggerNotifications();
-
-  useEffect(() => {
-    sendNotification({
-      title: "VideoScreen Loaded",
-      body: "Video Loaded successfully!",
-      type: Notifications.SchedulableTriggerInputTypes.TIME_INTERVAL,
-      seconds: 1,
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const player = useVideoPlayer(videoSource, (player) => {
+  const isNotificationTrigger = useRef(false);
+  const player = useVideoPlayer(videoSource, player => {
     player.loop = true;
     player.play();
   });
+
+  const sendNotification = useTriggerNotifications();
+
+  useEffect(() => {
+    const sub = player.addListener('statusChange', ({status}) => {
+      if (status === 'readyToPlay' && !isNotificationTrigger.current) {
+        sendNotification({
+          title: 'VideoScreen Loaded',
+          body: 'Video Loaded successfully!',
+          seconds: 1,
+        });
+        isNotificationTrigger.current = true;
+      }
+    });
+    return () => sub.remove();
+  }, [player, sendNotification]);
 
   return (
     <View style={styles.contentContainer}>
@@ -41,20 +46,3 @@ export default function VideoPlayerScreen() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  contentContainer: {
-    flex: 1,
-    padding: 10,
-    alignItems: "center",
-    justifyContent: "center",
-    paddingHorizontal: 50,
-  },
-  video: {
-    width: Dimensions.get("window").width,
-    height: 275,
-  },
-  controlsContainer: {
-    padding: 10,
-  },
-});
