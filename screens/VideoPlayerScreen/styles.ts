@@ -11,7 +11,7 @@ export default StyleSheet.create({
   },
   video: {
     width: screenWidth,
-    height: 275,
+    // height: 275,
   },
   controlsContainer: {
     padding: 10,

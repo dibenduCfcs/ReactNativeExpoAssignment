@@ -23,15 +23,11 @@
       "useLegacyPackaging": true,
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
-      "permissions": [
-        "NOTIFICATIONS",
-        "NOTIFICATIONS",
-        "WAKE_LOCK",
-        "VIBRATE" 
-      ],
+      "permissions": ["NOTIFICATIONS", "NOTIFICATIONS", "WAKE_LOCK", "VIBRATE"],
       "package": "com.anonymous.ReactNativeExpoAssignment"
     },
     "web": {
+      "bundler": "metro",
       "output": "static",
       "favicon": "./assets/images/favicon.png"
     },

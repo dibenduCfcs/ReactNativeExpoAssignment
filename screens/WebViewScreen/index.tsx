@@ -1,10 +1,11 @@
 import useTriggerNotifications from '@/hooks/use-send-Notification';
 import useNotifications from '@/hooks/useNotification';
 import * as Notifications from 'expo-notifications';
+import {Button} from 'heroui-native';
 import React, {useRef} from 'react';
-import {Text, TouchableOpacity, View} from 'react-native';
-import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
+import {Text, View} from 'react-native';
 import WebView from 'react-native-webview';
+import '../../global.css';
 import styles from './styles';
 
 interface Props {
@@ -66,10 +67,8 @@ const WebViewScreen: React.FC<Props> = ({navigation}) => {
     }
   };
 
-  const inset = useSafeAreaInsets();
-
   return (
-    <SafeAreaView style={styles.container} edges={{bottom: 'additive'}}>
+    <View className="flex-1 bg-white">
       <WebView
         originWhitelist={['*']}
         source={{uri: url}}
@@ -79,26 +78,32 @@ const WebViewScreen: React.FC<Props> = ({navigation}) => {
         onLoadEnd={onLoadEnd}
       />
 
-      <View style={[styles.buttons, {bottom: inset.bottom + 20}]}>
-        <View style={styles.row}>
-          <TouchableOpacity style={styles.btn} onPress={sendNotification1}>
-            <Text style={styles.btnText}>{'Notify 1'}</Text>
-          </TouchableOpacity>
-
-          <TouchableOpacity style={styles.btn3} onPress={sendNotification2}>
-            <Text style={styles.btnText}>{'Notify 2'}</Text>
-          </TouchableOpacity>
+      <View className="absolute self-center w-360 gap-3 bottom-0">
+        <View className="flex-row justify-center gap-5">
+          <Button
+            feedbackVariant="ripple"
+            onPress={sendNotification1}
+            className="bg-[#1976D2] py-3 w-[160px] rounded-lg items-center justify-center">
+            <Text className="text-white font-semibold text-base">Notify 1</Text>
+          </Button>
+          <Button
+            feedbackVariant="ripple"
+            onPress={sendNotification2}
+            className="bg-[#197638] py-3 w-[160px] rounded-lg items-center justify-center">
+            <Text className="text-white font-semibold text-base">Notify 2</Text>
+          </Button>
         </View>
-
-        <TouchableOpacity
-          style={styles.btn2}
+        <Button
+          className="bg-[#A41976] py-3 w-[340px] items-center rounded-lg"
           onPress={() => {
             navigation.navigate('VideoPlayerScreen');
           }}>
-          <Text style={styles.btnText}>Go To Video Player</Text>
-        </TouchableOpacity>
+          <Text className="text-white font-bold text-base">
+            Go To Video Player
+          </Text>
+        </Button>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 

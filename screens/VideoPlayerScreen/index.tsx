@@ -38,6 +38,7 @@ export default function VideoPlayerScreen() {
   return (
     <View style={styles.contentContainer}>
       <VideoView
+        className="h-[275]"
         style={styles.video}
         player={player}
         allowsFullscreen
