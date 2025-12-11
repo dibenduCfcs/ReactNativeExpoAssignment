@@ -7,11 +7,10 @@ export default StyleSheet.create({
     padding: 10,
     alignItems: 'center',
     justifyContent: 'center',
-    paddingHorizontal: 50,
   },
   video: {
     width: screenWidth,
-    // height: 275,
+    height: 275,
   },
   controlsContainer: {
     padding: 10,

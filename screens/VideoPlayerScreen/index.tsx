@@ -2,6 +2,7 @@ import useTriggerNotifications from '@/hooks/use-send-Notification';
 import {useVideoPlayer, VideoView} from 'expo-video';
 import {useEffect, useRef} from 'react';
 import {View} from 'react-native';
+import '../../global.css';
 import styles from './styles';
 
 /**
@@ -36,9 +37,8 @@ export default function VideoPlayerScreen() {
   }, [player, sendNotification]);
 
   return (
-    <View style={styles.contentContainer}>
+    <View className="flex-1 item-center justify-center">
       <VideoView
-        className="h-[275]"
         style={styles.video}
         player={player}
         allowsFullscreen

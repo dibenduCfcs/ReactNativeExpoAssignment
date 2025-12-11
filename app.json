@@ -3,7 +3,7 @@
     "name": "ReactNativeExpoAssignment",
     "slug": "ReactNativeExpoAssignment",
     "entryPoint": "./screens/VideoPlayerScreen",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "reactnativeexpoassignment",
@@ -23,7 +23,13 @@
       "useLegacyPackaging": true,
       "edgeToEdgeEnabled": true,
       "predictiveBackGestureEnabled": false,
-      "permissions": ["NOTIFICATIONS", "NOTIFICATIONS", "WAKE_LOCK", "VIBRATE"],
+      "versionCode": 2,
+      "permissions": [
+        "NOTIFICATIONS",
+        "NOTIFICATIONS",
+        "WAKE_LOCK",
+        "VIBRATE"
+      ],
       "package": "com.anonymous.ReactNativeExpoAssignment"
     },
     "web": {
@@ -65,6 +71,12 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "463ba1e6-f387-4640-b554-b5035adb900f"
+      }
     }
   }
 }

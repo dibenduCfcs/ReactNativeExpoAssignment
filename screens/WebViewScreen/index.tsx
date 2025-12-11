@@ -1,12 +1,11 @@
+import CustomButton from '@/components/CustomButton';
 import useTriggerNotifications from '@/hooks/use-send-Notification';
 import useNotifications from '@/hooks/useNotification';
 import * as Notifications from 'expo-notifications';
-import {Button} from 'heroui-native';
 import React, {useRef} from 'react';
-import {Text, View} from 'react-native';
+import {View} from 'react-native';
 import WebView from 'react-native-webview';
 import '../../global.css';
-import styles from './styles';
 
 interface Props {
   navigation: any;
@@ -70,38 +69,34 @@ const WebViewScreen: React.FC<Props> = ({navigation}) => {
   return (
     <View className="flex-1 bg-white">
       <WebView
+        className="flex-1"
         originWhitelist={['*']}
         source={{uri: url}}
         contentInset={{top: 0}}
         automaticallyAdjustContentInsets={false}
-        style={styles.webView}
         onLoadEnd={onLoadEnd}
       />
 
-      <View className="absolute self-center w-360 gap-3 bottom-0">
+      <View className="absolute self-center w-360 gap-3 bottom-safe-offset-5">
         <View className="flex-row justify-center gap-5">
-          <Button
-            feedbackVariant="ripple"
+          <CustomButton
+            className="bg-[#1976D2]"
             onPress={sendNotification1}
-            className="bg-[#1976D2] py-3 w-[160px] rounded-lg items-center justify-center">
-            <Text className="text-white font-semibold text-base">Notify 1</Text>
-          </Button>
-          <Button
-            feedbackVariant="ripple"
+            buttonName={'Notify 1'}
+          />
+          <CustomButton
+            className="bg-[#197638]"
             onPress={sendNotification2}
-            className="bg-[#197638] py-3 w-[160px] rounded-lg items-center justify-center">
-            <Text className="text-white font-semibold text-base">Notify 2</Text>
-          </Button>
+            buttonName={'Notify 2'}
+          />
         </View>
-        <Button
-          className="bg-[#A41976] py-3 w-[340px] items-center rounded-lg"
+        <CustomButton
+          className="bg-[#A41976] w-[340]"
           onPress={() => {
             navigation.navigate('VideoPlayerScreen');
-          }}>
-          <Text className="text-white font-bold text-base">
-            Go To Video Player
-          </Text>
-        </Button>
+          }}
+          buttonName={'Go To Video Player'}
+        />
       </View>
     </View>
   );
